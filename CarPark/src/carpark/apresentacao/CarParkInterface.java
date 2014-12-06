@@ -7,13 +7,11 @@ package carpark.apresentacao;
 
 import carpark.negocio.CarParkDAOException;
 import carpark.negocio.CarParkFacade;
+import carpark.persistencia.DBInitializer;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import static java.lang.Integer.parseInt;
-import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -25,6 +23,7 @@ public class CarParkInterface {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws CarParkDAOException {
+
         CarParkFacade facade = new CarParkFacade();
         boolean running = true;
         

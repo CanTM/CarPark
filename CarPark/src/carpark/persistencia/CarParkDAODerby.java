@@ -10,8 +10,7 @@ import carpark.negocio.CarParkDAOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.SQLException;
 
 /**
  *
@@ -42,10 +41,10 @@ public class CarParkDAODerby implements CarParkDAO {
         int id = 0;
         String sql1 = "select * from parkedcars where INSIDE = ? and VEHICLE = ?";
         try (Connection conexao = DBInitializer.conectarBd()) {
-            try (PreparedStatement command = conexao.prepareStatement(sql1)) {
-                command.setBoolean(1, true);
-                command.setString(2, vehicle);
-                try (ResultSet result = command.executeQuery()) {
+            try (PreparedStatement command1 = conexao.prepareStatement(sql1)) {
+                command1.setBoolean(1, true);
+                command1.setString(2, vehicle);
+                try (ResultSet result = command1.executeQuery()) {
                     if (result.next()) {
                         id = result.getInt("ID");
                     }
@@ -54,18 +53,25 @@ public class CarParkDAODerby implements CarParkDAO {
         } catch (Exception e) {
             throw new CarParkDAOException("Fail in search a parked vahicle", e);
         }
-        String sql2 = "update parkedcars set FEE = ? and INSIDE = ? where ID = ?";
-        int resultado = 0;
+        String sql2 = "update parkedcars set INSIDE = ? where ID = ?";
+        String sql3 = "update parkedcars set FEE = ? where ID = ?";
+        int resultado1 = 0;
+        int resultado2 = 0;
         try (Connection conexao = DBInitializer.conectarBd()) {
-            try (PreparedStatement command = conexao.prepareStatement(sql2)) {
-                command.setInt(1, fee);
-                command.setBoolean(2, false);
-                resultado = command.executeUpdate();
+            try (PreparedStatement command2 = conexao.prepareStatement(sql2)) {
+                command2.setBoolean(1, false);
+                command2.setInt(2, id);
+                resultado1 = command2.executeUpdate();
+            }
+            try (PreparedStatement command3 = conexao.prepareStatement(sql3)) {
+                command3.setInt(1, fee);
+                command3.setInt(2, id);
+                resultado2 = command3.executeUpdate();
             }
         } catch (Exception e) {
             throw new CarParkDAOException("Fail in update exiting vehicle", e);
         }
-        if (resultado == 0) {
+        if (resultado1 == 0 || resultado2 == 0) {
             throw new CarParkDAOException("Fail in executing command");
         }
     }
@@ -145,6 +151,27 @@ public class CarParkDAODerby implements CarParkDAO {
             }
         } catch (Exception e) {
             throw new CarParkDAOException("Fail in calculating total fee", e);
+        }
+    }
+
+    public void cleanDB() throws CarParkDAOException {
+        String sql1 = "select * from parkedcars";
+        try (Connection conexao = DBInitializer.conectarBd()) {
+            try (PreparedStatement command = conexao.prepareStatement(sql1)) {
+                try (ResultSet resultado = command.executeQuery()) {
+                    while (resultado.next()) {
+                        String sql2 = "delete from parkedcars where ID = ?";
+                        try (PreparedStatement command1 = conexao.prepareStatement(sql2)) {
+                            command1.setInt(1, resultado.getInt("ID"));
+                            command1.execute();
+                        }
+                    }
+                }
+
+            }
+
+        } catch (Exception e) {
+            throw new CarParkDAOException("Fail in cleaning DB", e);
         }
     }
 }

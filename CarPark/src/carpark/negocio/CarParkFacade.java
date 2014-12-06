@@ -6,52 +6,67 @@
 package carpark.negocio;
 
 import carpark.persistencia.CarParkDAODerby;
+import carpark.persistencia.DBInitializer;
+import java.sql.SQLException;
 
 /**
  *
  * @author CanTM
  */
 public class CarParkFacade {
+
     private CarPark carPark;
     private CarParkDAODerby carParkDaoDerby = new CarParkDAODerby();
 
-    public void initCarPark(int totalSpaces) {
+    public void initCarPark(int totalSpaces) throws CarParkDAOException {
+        carParkDaoDerby.cleanDB();
         carPark = new CarPark(totalSpaces);
     }
 
     public void enterVehicle(String vehicle) throws CarParkDAOException {
-        if(vehicle.equals(Vehicle.CAR.name())){
-            carPark.setFreeSpaces(carPark.getFreeSpaces() - 1);
-        }
-        else if(vehicle.equals(Vehicle.TRUCK.name())){
-            carPark.setFreeSpaces(carPark.getFreeSpaces() - 2);
-        }
-        else{
+        if (vehicle.equals(Vehicle.CAR.name())) {
+            if (carPark.getFreeSpaces() >= 1) {
+                carParkDaoDerby.enterVehicle(vehicle);
+                carPark.setFreeSpaces(carPark.getFreeSpaces() - 1);
+            } else {
+                System.out.println("There is no space for this vehicle");
+            }
+        } else if (vehicle.equals(Vehicle.TRUCK.name())) {
+            if (carPark.getFreeSpaces() >= 2) {
+                carParkDaoDerby.enterVehicle(vehicle);
+                carPark.setFreeSpaces(carPark.getFreeSpaces() - 2);
+            } else {
+                System.out.println("There is no space for this vehicle");
+            }
+        } else {
             System.out.println("This is not a valid vehicle");
-            return;
         }
-        carParkDaoDerby.enterVehicle(vehicle);
     }
-    
-    public void exitVehicle(String vehicle, int hours) throws CarParkDAOException{
-        int fee;
-        if(vehicle.equals(Vehicle.CAR.name())){
-            fee = carPark.carFee;
-            carPark.setFreeSpaces(carPark.getFreeSpaces() + 1);
-        }
-        else if(vehicle.equals(Vehicle.TRUCK.name())){
-            fee = carPark.truckFee;
-            carPark.setFreeSpaces(carPark.getFreeSpaces() + 2);
-        }
-        else{
+
+    public void exitVehicle(String vehicle, int hours) throws CarParkDAOException {
+        int totalFee;
+        if (vehicle.equals(Vehicle.CAR.name())) {
+            if (carParkDaoDerby.getParkedVehiclesNumber(vehicle) > 0) {
+                totalFee = carPark.carFee * hours;
+                carParkDaoDerby.exitVehicle(vehicle, totalFee);
+                carPark.setFreeSpaces(carPark.getFreeSpaces() + 1);
+            } else {
+                System.out.println("There is no such vehicle parked");
+            }
+        } else if (vehicle.equals(Vehicle.TRUCK.name())) {
+            if (carParkDaoDerby.getParkedVehiclesNumber(vehicle) > 0) {
+                totalFee = carPark.truckFee * hours;
+                carParkDaoDerby.exitVehicle(vehicle, totalFee);
+                carPark.setFreeSpaces(carPark.getFreeSpaces() + 2);
+            } else {
+                System.out.println("There is no such vehicle parked");
+            }
+        } else {
             System.out.println("This is not a valid vehicle");
-            return;
         }
-        int totalFee = fee*hours;
-        carParkDaoDerby.exitVehicle(vehicle, totalFee);
     }
-    
-    public String getReport() throws CarParkDAOException{
+
+    public String getReport() throws CarParkDAOException {
         Report report = new Report();
         report.setCarsEntered(carParkDaoDerby.getTotalNumberOfVehiclesThatEntered("CAR"));
         report.setCarsExited(carParkDaoDerby.getTotalNumberOfVehiclesThatExited("CAR"));
