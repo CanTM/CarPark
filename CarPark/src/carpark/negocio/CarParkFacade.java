@@ -6,8 +6,6 @@
 package carpark.negocio;
 
 import carpark.persistencia.CarParkDAODerby;
-import carpark.persistencia.DBInitializer;
-import java.sql.SQLException;
 
 /**
  *

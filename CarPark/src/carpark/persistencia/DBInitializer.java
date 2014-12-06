@@ -6,7 +6,6 @@
 package carpark.persistencia;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import javax.sql.DataSource;
 import org.apache.derby.jdbc.ClientConnectionPoolDataSource;
 

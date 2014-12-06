@@ -10,7 +10,6 @@ import carpark.negocio.CarParkDAOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 /**
  *
@@ -154,6 +153,7 @@ public class CarParkDAODerby implements CarParkDAO {
         }
     }
 
+    @Override
     public void cleanDB() throws CarParkDAOException {
         String sql1 = "select * from parkedcars";
         try (Connection conexao = DBInitializer.conectarBd()) {

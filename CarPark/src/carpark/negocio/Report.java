@@ -86,15 +86,14 @@ public class Report {
 
     @Override
     public String toString() {
-        return "CarsEntered: " + CarsEntered 
-                + "\n TrucksEntered: " + TrucksEntered 
-                + "\n CarsExited: " + CarsExited 
-                + "\n TrucksExited: " + TrucksExited 
-                + "\n ParkingCars: " + ParkingCars 
-                + "\n ParkingTrucks: " + ParkingTrucks 
-                + "\n Spacesavailable: " + Spacesavailable 
-                + "\n Feespaid: " + Feespaid;
+        return " Cars Entered: " + CarsEntered
+                + "\n Trucks Entered: " + TrucksEntered
+                + "\n Cars Exited: " + CarsExited
+                + "\n Trucks Exited: " + TrucksExited
+                + "\n Parking Cars: " + ParkingCars
+                + "\n Parking Trucks: " + ParkingTrucks
+                + "\n Spaces Available: " + Spacesavailable
+                + "\n Fees Paid: " + Feespaid;
     }
-    
-    
+
 }

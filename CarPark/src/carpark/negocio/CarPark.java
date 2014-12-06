@@ -10,7 +10,8 @@ package carpark.negocio;
  * @author CanTM
  */
 public class CarPark {
-    private int spaces;
+
+    private final int spaces;
     public final int carFee = 2;
     public final int truckFee = 3;
     private int freeSpaces;
@@ -31,5 +32,5 @@ public class CarPark {
     public void setFreeSpaces(int freeSpaces) {
         this.freeSpaces = freeSpaces;
     }
-    
+
 }

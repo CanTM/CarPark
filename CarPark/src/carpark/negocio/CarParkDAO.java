@@ -22,4 +22,6 @@ public interface CarParkDAO {
     public int getTotalNumberOfVehiclesThatExited(String vehicle) throws CarParkDAOException;
 
     public int getTotalFee() throws CarParkDAOException;
+
+    public void cleanDB() throws CarParkDAOException;
 }

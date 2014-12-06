@@ -10,7 +10,7 @@ package carpark.negocio;
  * @author CanTM
  */
 public class CarParkDAOException extends Exception {
-    
+
     public CarParkDAOException() {
         super();
     }

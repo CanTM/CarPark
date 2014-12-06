@@ -7,7 +7,6 @@ package carpark.apresentacao;
 
 import carpark.negocio.CarParkDAOException;
 import carpark.negocio.CarParkFacade;
-import carpark.persistencia.DBInitializer;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -21,12 +20,13 @@ public class CarParkInterface {
 
     /**
      * @param args the command line arguments
+     * @throws carpark.negocio.CarParkDAOException
      */
     public static void main(String[] args) throws CarParkDAOException {
 
         CarParkFacade facade = new CarParkFacade();
         boolean running = true;
-        
+
         System.out.println("How many spaces does the car park have?");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         try {
@@ -34,50 +34,53 @@ public class CarParkInterface {
             int totalSpaces = parseInt(userImput);
             facade.initCarPark(totalSpaces);
         } catch (IOException ex) {
-            System.out.println("Não foi possível inicializar CarPark");
+            System.out.println("Could not initialize Car Park");
         }
-        
-        while(running == true){
-            try{
+
+        while (running == true) {
+            try {
                 System.out.println("1 - ENTER VEHICLE");
                 System.out.println("2 - EXIT VEHICLE");
                 System.out.println("3 - REPORT");
                 System.out.println("4 - QUIT");
+                System.out.println("");
                 String operation = br.readLine();
-                switch(operation){
+                switch (operation) {
                     case "1":
+                        System.out.println("Choose a vehicle to enter:");
                         System.out.println("1 - CAR");
                         System.out.println("2 - TRUCK");
+                        System.out.println("");
                         String enter = br.readLine();
-                        if(enter.equals("1")){
+                        if (enter.equals("1")) {
                             facade.enterVehicle("CAR");
-                        }
-                        else if(enter.equals("2")){
+                        } else if (enter.equals("2")) {
                             facade.enterVehicle("TRUCK");
-                        }
-                        else{
+                        } else {
                             System.out.println("This is not a valid option");
                         }
                         break;
                     case "2":
+                        System.out.println("Choose a vehicle to exit:");
                         System.out.println("1 - CAR");
                         System.out.println("2 - TRUCK");
+                        System.out.println("");
                         String exit = br.readLine();
                         System.out.println("HOURS INSIDE CAR PARK: ");
                         String time = br.readLine();
                         int hours = parseInt(time);
-                        if(exit.equals("1")){
+                        if (exit.equals("1")) {
                             facade.exitVehicle("CAR", hours);
-                        }
-                        else if(exit.equals("2")){
+                        } else if (exit.equals("2")) {
                             facade.exitVehicle("TRUCK", hours);
-                        }
-                        else{
+                        } else {
                             System.out.println("This is not a valid option");
-                        }   
+                        }
                         break;
                     case "3":
+                        System.out.println("");
                         System.out.println(facade.getReport());
+                        System.out.println("");
                         break;
                     case "4":
                         running = false;
@@ -86,9 +89,9 @@ public class CarParkInterface {
                         System.out.println("This is not a valid option");
                 }
             } catch (IOException ex) {
-                System.out.println("Não foi possível ler a sua opção");
+                System.out.println("Your option could not be read");
             }
         }
     }
-    
+
 }
