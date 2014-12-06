@@ -40,29 +40,47 @@ public class CarParkInterface {
         
         while(running == true){
             try{
+                System.out.println("1 - ENTER VEHICLE");
+                System.out.println("2 - EXIT VEHICLE");
+                System.out.println("3 - REPORT");
+                System.out.println("4 - QUIT");
                 String operation = br.readLine();
-                System.out.println("operation: " + operation);
                 switch(operation){
-                    case "ENTER CAR":
-                    case "ENTER TRUCK":
+                    case "1":
+                        System.out.println("1 - CAR");
+                        System.out.println("2 - TRUCK");
                         String enter = br.readLine();
-                        StringTokenizer st1 = new StringTokenizer(enter, " ");
-                        String vehicle1 = st1.nextToken();
-                        facade.enterVehicle(vehicle1);
+                        if(enter.equals("1")){
+                            facade.enterVehicle("CAR");
+                        }
+                        else if(enter.equals("2")){
+                            facade.enterVehicle("TRUCK");
+                        }
+                        else{
+                            System.out.println("This is not a valid option");
+                        }
                         break;
-                    case "EXIT CAR":
-                    case "EXIT TRUCK":
+                    case "2":
+                        System.out.println("1 - CAR");
+                        System.out.println("2 - TRUCK");
                         String exit = br.readLine();
-                        StringTokenizer st2 = new StringTokenizer(exit, " ");
-                        String vehicle2 = st2.nextToken();
-                        String time = st2.nextToken();
+                        System.out.println("HOURS INSIDE CAR PARK: ");
+                        String time = br.readLine();
                         int hours = parseInt(time);
-                        facade.exitVehicle(vehicle2, hours);
+                        if(exit.equals("1")){
+                            facade.exitVehicle("CAR", hours);
+                        }
+                        else if(exit.equals("2")){
+                            facade.exitVehicle("TRUCK", hours);
+                        }
+                        else{
+                            System.out.println("This is not a valid option");
+                        }   
                         break;
-                    case "REPORT":
-                        facade.getReport();
+                    case "3":
+                        System.out.println(facade.getReport());
                         break;
-                    case "QUIT":
+                    case "4":
                         running = false;
                         break;
                     default:
