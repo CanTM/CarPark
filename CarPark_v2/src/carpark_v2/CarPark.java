@@ -119,57 +119,57 @@ public class CarPark {
         this.totalPaidFees = totalPaidFees;
     }
 
-    //@ensures\result==carsIn;
+    //@ensures \result == carsIn;
     public /*@ pure @*/ int getCarsIn() {
         return carsIn;
     }
     
-    //@ensures\result==carsOut;
+    //@ensures \result == carsOut;
     public /*@ pure @*/ int getCarsOut() {
         return carsOut;
     }
 
-    //@ensures\result==parkedCars;
+    //@ensures \result == parkedCars;
     public /*@ pure @*/ int getParkedCars() {
         return parkedCars;
     }
 
-    //@ensures\result==trucksIn;
+    //@ensures \result == trucksIn;
     public /*@ pure @*/ int getTrucksIn() {
         return trucksIn;
     }
 
-    //@ensures\result==trucksOut;
+    //@ensures \result == trucksOut;
     public /*@ pure @*/ int getTrucksOut() {
         return trucksOut;
     }
 
-    //@ensures\result==parkedTrucks;
+    //@ensures \result == parkedTrucks;
     public /*@ pure @*/ int getParkedTrucks() {
         return parkedTrucks;
     }
 
-    //@ensures\result==totalSpaces;
+    //@ensures \result == totalSpaces;
     public /*@ pure @*/ int getTotalSpaces() {
         return totalSpaces;
     }
     
-    //@ensures\result==freeSpaces;
+    //@ensures \result == freeSpaces;
     public /*@ pure @*/ int getFreeSpaces() {
         return freeSpaces;
     }
 
-    //@ensures\result==carFee;
+    //@ensures \result == carFee;
     public /*@ pure @*/ int getCarFee() {
         return carFee;
     }
 
-    //@ensures\result==truckFee;
+    //@ensures \result == truckFee;
     public /*@ pure @*/ int getTruckFee() {
         return truckFee;
     }
 
-    //@ensures\result==totalPaidFees;
+    //@ensures \result == totalPaidFees;
     public /*@ pure @*/ int getTotalPaidFees() {
         return totalPaidFees;
     }  

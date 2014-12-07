@@ -50,7 +50,7 @@ public class CarParkFacade {
 
     void exitVehicle(Vehicle vehicle, int hours) {
         if(vehicle.equals(Vehicle.CAR)){
-            if(cp.getParkedCars() > 0){
+            if(cp.getParkedCars() > 0 && hours > 0){
                 cp.setCarsOut(cp.getCarsOut() + 1);
                 cp.setParkedCars(cp.getParkedCars() - 1);
                 cp.setFreeSpaces(cp.getFreeSpaces() + 1);
@@ -61,7 +61,7 @@ public class CarParkFacade {
             }
         }
         else if(vehicle.equals(Vehicle.TRUCK)){
-            if(cp.getParkedTrucks() > 0){
+            if(cp.getParkedTrucks() > 0 && hours > 0){
                 cp.setTrucksOut(cp.getTrucksOut() + 1);
                 cp.setParkedTrucks(cp.getParkedTrucks() - 1);
                 cp.setFreeSpaces(cp.getFreeSpaces() + 2);
@@ -86,5 +86,9 @@ public class CarParkFacade {
                 + "\nSpaces available: " + cp.getFreeSpaces() 
                 + "\nFees paid: " + cp.getTotalPaidFees();
         return report;
+    }
+
+    public CarPark getCp() {
+        return cp;
     }
 }
