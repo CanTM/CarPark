@@ -28,94 +28,149 @@ public class CarPark {
     private int totalPaidFees;
 
     //contructor
+    /*@
+    @ requires totalSpaces != null && totalSpaces > 0;
+    @ ensures getTotalSpaces() == totalSpaces && getFreeSpaces() == totalSpaces;
+    @ ensures getCarsIn() == 0;
+    @ ensures getCarsOut() == 0;
+    @ ensures getParkedCars() == 0;
+    @ ensures getTrucksIn() == 0;
+    @ ensures getTrucksOut() == 0;
+    @ ensures getParkesTrucks() == 0;
+    @ ensures getCarFee() == 2;
+    @ ensures getTruckFee() == 3;
+    @ ensures getTotalPaidFees() == 0;
+    @*/
     public CarPark(int totalSpaces) {
+        this.totalSpaces = totalSpaces;
+        this.freeSpaces = totalSpaces;
         this.carsIn = 0;
         this.carsOut = 0;
         this.parkedCars = 0;
         this.trucksIn = 0;
         this.trucksOut = 0;
         this.parkedTrucks = 0;
-        this.totalSpaces = totalSpaces;
-        this.freeSpaces = totalSpaces;
         this.carFee = 2;
         this.truckFee = 3;
         this.totalPaidFees = 0;
     }
 
     //getters and setters
+    /*@
+    @ requires carsIn >=0;
+    @ ensures getCarsIn() == carsIn;
+    */
     public void setCarsIn(int carsIn) {
         this.carsIn = carsIn;
     }
 
+    /*@
+    @ requires carsOut >= 0;
+    @ ensures getCarsOut() == carsOut;
+    */
     public void setCarsOut(int carsOut) {
         this.carsOut = carsOut;
     }
 
+    /*@
+    @ requires parkedCars >= 0 && parkedCars <= (getTotalSpaces() - (getParkedTrucks()*2));
+    @ ensures getParkedCars() == parkedCars;
+    */
     public void setParkedCars(int parkedCars) {
         this.parkedCars = parkedCars;
     }
 
+    /*@
+    @ requires trucksIn >=0;
+    @ ensures getTrucksIn() == trucksIn;
+    */
     public void setTrucksIn(int trucksIn) {
         this.trucksIn = trucksIn;
     }
 
+    /*@
+    @ requires trucksOut >= 0;
+    @ ensures getTrucksOut() == trucksOut;
+    */
     public void setTrucksOut(int trucksOut) {
         this.trucksOut = trucksOut;
     }
 
+    /*@
+    @ requires parkedTrucks >= 0 && parkedTrucks*2 <= (getTotalSpaces() - (getParkedCars());
+    @ ensures getParkedCars() == parkedCars;
+    */
     public void setParkedTrucks(int parkedTrucks) {
         this.parkedTrucks = parkedTrucks;
     }
-
+    /*@
+    @ requires freeSpaces >= 0 && freeSpaces <= (getTotalSpaces() - (getParkedCars() + (getParkedTrucks()*2)));
+    @ ensures getFreeSpaces() == freeSpaces;
+    */
     public void setFreeSpaces(int freeSpaces) {
         this.freeSpaces = freeSpaces;
     }
-
+    
+    /*@
+    @ requires totalPaidFees >= 0;
+    @ ensures getTotalPaidFees() == totalPaidFees;
+    */
     public void setTotalPaidFees(int totalPaidFees) {
         this.totalPaidFees = totalPaidFees;
     }
 
-    public int getCarsIn() {
+    //@ensures\result==carsIn;
+    public /*@ pure @*/ int getCarsIn() {
         return carsIn;
     }
-
-    public int getCarsOut() {
+    
+    //@ensures\result==carsOut;
+    public /*@ pure @*/ int getCarsOut() {
         return carsOut;
     }
 
-    public int getParkedCars() {
+    //@ensures\result==parkedCars;
+    public /*@ pure @*/ int getParkedCars() {
         return parkedCars;
     }
 
-    public int getTrucksIn() {
+    //@ensures\result==trucksIn;
+    public /*@ pure @*/ int getTrucksIn() {
         return trucksIn;
     }
 
-    public int getTrucksOut() {
+    //@ensures\result==trucksOut;
+    public /*@ pure @*/ int getTrucksOut() {
         return trucksOut;
     }
 
-    public int getParkedTrucks() {
+    //@ensures\result==parkedTrucks;
+    public /*@ pure @*/ int getParkedTrucks() {
         return parkedTrucks;
     }
 
-    public int getTotalSpaces() {
+    //@ensures\result==totalSpaces;
+    public /*@ pure @*/ int getTotalSpaces() {
         return totalSpaces;
     }
-
-    public int getFreeSpaces() {
+    
+    //@ensures\result==freeSpaces;
+    public /*@ pure @*/ int getFreeSpaces() {
         return freeSpaces;
     }
 
-    public int getCarFee() {
+    //@ensures\result==carFee;
+    public /*@ pure @*/ int getCarFee() {
         return carFee;
     }
 
-    public int getTruckFee() {
+    //@ensures\result==truckFee;
+    public /*@ pure @*/ int getTruckFee() {
         return truckFee;
     }
 
-    public int getTotalPaidFees() {
+    //@ensures\result==totalPaidFees;
+    public /*@ pure @*/ int getTotalPaidFees() {
         return totalPaidFees;
     }  
 }

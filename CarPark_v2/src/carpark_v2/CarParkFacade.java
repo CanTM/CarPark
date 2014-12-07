@@ -14,7 +14,12 @@ public class CarParkFacade {
     private CarPark cp;
     
     public void initCarPark(int totalSpaces) {
-        cp = new CarPark(totalSpaces);
+        if(totalSpaces > 0){
+            cp = new CarPark(totalSpaces);
+        }
+        else{
+            System.out.println("Please enter a number greater than zero");
+        }
     }
 
     public void enterVehicle(Vehicle vehicle) {
@@ -81,6 +86,4 @@ public class CarParkFacade {
         System.out.println("Spaces available: " + cp.getFreeSpaces());
         System.out.println("Fees paid: " + cp.getTotalPaidFees());
     }
-
-    
 }
