@@ -31,7 +31,9 @@ public class CarParkMain {
                 if (userInput.matches("^[0-9]+$")) {
                     int totalSpaces = parseInt(userInput);
                     facade.initCarPark(totalSpaces);
-                    running1 = false;
+                    if (facade.getCp() != null) {
+                        running1 = false;
+                    }
                 } else {
                     System.out.println("Please enter a positive number");
                 }
@@ -72,16 +74,30 @@ public class CarParkMain {
                         System.out.println("2 - TRUCK");
                         System.out.println("");
                         String exit = br.readLine();
-                        System.out.println("");
-                        System.out.println("HOURS INSIDE CAR PARK: ");
-                        String time = br.readLine();
-                        int hours = parseInt(time);
-                        if (exit.equals("1")) {
-                            facade.exitVehicle(Vehicle.CAR, hours);
-                        } else if (exit.equals("2")) {
-                            facade.exitVehicle(Vehicle.TRUCK, hours);
-                        } else {
-                            System.out.println("This is not a valid option");
+                        boolean testHours = true;
+                        while (testHours) {
+                            System.out.println("");
+                            System.out.println("HOURS INSIDE CAR PARK: ");
+                            String time = br.readLine();
+                            int hours;
+                            if (time.matches("^[0-9]+$")) {
+                                hours = parseInt(time);
+                                if (hours > 0) {
+                                    testHours = false;
+                                    if (exit.equals("1")) {
+                                        facade.exitVehicle(Vehicle.CAR, hours);
+                                    } else if (exit.equals("2")) {
+                                        facade.exitVehicle(Vehicle.TRUCK, hours);
+                                    } else {
+                                        System.out.println("This is not a valid vehicle");
+                                    }
+                                }
+                                else{
+                                    System.out.println("Please enter a valid positive number");
+                                }
+                            } else {
+                                System.out.println("Please enter a valid positive number");
+                            }
                         }
                         break;
                     case "3":
@@ -101,5 +117,4 @@ public class CarParkMain {
             }
         }
     }
-
 }
