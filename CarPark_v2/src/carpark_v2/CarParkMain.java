@@ -21,21 +21,28 @@ public class CarParkMain {
      */
     public static void main(String[] args) {
         CarParkFacade facade = new CarParkFacade();
-        boolean running = true;
-
-        System.out.println("How many spaces does the car park have?");
+        boolean running1 = true;
+        boolean running2 = true;
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        try {
-            String userImput = br.readLine();
-            int totalSpaces = parseInt(userImput);
-            facade.initCarPark(totalSpaces);
-        } catch (IOException ex) {
-            System.out.println("Could not initialize Car Park");
+        while (running1) {
+            System.out.println("How many spaces does the car park have?");
+            try {
+                String userInput = br.readLine();
+                if (userInput.matches("^[0-9]+$")) {
+                    int totalSpaces = parseInt(userInput);
+                    facade.initCarPark(totalSpaces);
+                    running1 = false;
+                } else {
+                    System.out.println("Please enter a positive number");
+                }
+            } catch (IOException ex) {
+                System.out.println("Could not initialize Car Park");
+            }
         }
-
-        while (running == true) {
+        while (running2) {
             try {
                 System.out.println("");
+                System.out.println("Type the number of the oparation you wish to perform");
                 System.out.println("1 - ENTER VEHICLE");
                 System.out.println("2 - EXIT VEHICLE");
                 System.out.println("3 - REPORT");
@@ -45,7 +52,7 @@ public class CarParkMain {
                 switch (operation) {
                     case "1":
                         System.out.println("");
-                        System.out.println("Choose a vehicle to enter:");
+                        System.out.println("Type the number of the vehicle to enter:");
                         System.out.println("1 - CAR");
                         System.out.println("2 - TRUCK");
                         System.out.println("");
@@ -60,7 +67,7 @@ public class CarParkMain {
                         break;
                     case "2":
                         System.out.println("");
-                        System.out.println("Choose a vehicle to exit:");
+                        System.out.println("Type the number of the vehicle to exit:");
                         System.out.println("1 - CAR");
                         System.out.println("2 - TRUCK");
                         System.out.println("");
@@ -84,7 +91,7 @@ public class CarParkMain {
                         System.out.println("");
                         break;
                     case "4":
-                        running = false;
+                        running2 = false;
                         break;
                     default:
                         System.out.println("This is not a valid option");
@@ -94,5 +101,5 @@ public class CarParkMain {
             }
         }
     }
-    
+
 }
