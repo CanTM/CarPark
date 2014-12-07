@@ -76,14 +76,15 @@ public class CarParkFacade {
         }
     }
 
-    public void getReport() {
-        System.out.println("Cars Entered: " + cp.getCarsIn());
-        System.out.println("Trucks Entered: " + cp.getTrucksIn());
-        System.out.println("Cars Exited: " + cp.getCarsOut());
-        System.out.println("Trucks Exited: " + cp.getTrucksOut());
-        System.out.println("Parking Cars: " + cp.getParkedCars());
-        System.out.println("Parking Trucks: " + cp.getParkedTrucks());
-        System.out.println("Spaces available: " + cp.getFreeSpaces());
-        System.out.println("Fees paid: " + cp.getTotalPaidFees());
+    public String getReport() {
+        String report = "Cars Entered: " + cp.getCarsIn() 
+                + "\nTrucks Entered: " + cp.getTrucksIn() 
+                + "\nCars Exited: " + cp.getCarsOut() 
+                + "\nTrucks Exited: " + cp.getTrucksOut() 
+                + "\nParking Cars: " + cp.getParkedCars() 
+                + "\nParking Trucks: " + cp.getParkedTrucks() 
+                + "\nSpaces available: " + cp.getFreeSpaces() 
+                + "\nFees paid: " + cp.getTotalPaidFees();
+        return report;
     }
 }

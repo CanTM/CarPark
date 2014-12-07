@@ -44,6 +44,7 @@ public class CarParkMain {
                 String operation = br.readLine();
                 switch (operation) {
                     case "1":
+                        System.out.println("");
                         System.out.println("Choose a vehicle to enter:");
                         System.out.println("1 - CAR");
                         System.out.println("2 - TRUCK");
@@ -58,11 +59,13 @@ public class CarParkMain {
                         }
                         break;
                     case "2":
+                        System.out.println("");
                         System.out.println("Choose a vehicle to exit:");
                         System.out.println("1 - CAR");
                         System.out.println("2 - TRUCK");
                         System.out.println("");
                         String exit = br.readLine();
+                        System.out.println("");
                         System.out.println("HOURS INSIDE CAR PARK: ");
                         String time = br.readLine();
                         int hours = parseInt(time);
@@ -76,7 +79,8 @@ public class CarParkMain {
                         break;
                     case "3":
                         System.out.println("");
-                        facade.getReport();
+                        String report = facade.getReport();
+                        System.out.println(report);
                         System.out.println("");
                         break;
                     case "4":
